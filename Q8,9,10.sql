@@ -32,20 +32,25 @@ BEGIN
    END LOOP;
 END $$;
 
--- fibo
-do $$ 
+--Write a function to find fibo for n numbers
+create or replace function fibo(n int) returns int as 
+$$
 DECLARE 
- n1 int:=0; 
- n2 int:=1; 
- temp int:=0; 
+ a int:=0;
+ b int:=1;
+ c int:=0;
 BEGIN 
- 	FOR i in 0..7 LOOP 
- 	raise notice '%',n1; 
- 	temp=n1; 
- 	n1=n2; 
- 	n2=temp+n2; 
- 	END LOOP; 
-end $$;
+	FOR i in 0..n-1 LOOP
+	raise notice '%',a; 
+ 	c=a; 
+ 	a=b; 
+ 	b=c+b; 
+ 	END LOOP;
+	return c;
+end;
+$$ language plpgsql;
+
+select fibo(7);
 
 --Write a function to find factorial of a number
 create or replace function fact(n int) returns int as 
